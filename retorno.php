@@ -3,32 +3,28 @@
 	include("conexao.php");
 	mysql_set_charset('utf8');
     
-    $frutas = array("Abacaxi", "Banana", "Maça", "Melância", "Pêra", "Morango", "Uva", "Mamão");
+    $sqlc = mysql_query("SELECT * FROM caixa");
 
-    @$q = $_REQUEST["q"];
+    echo "<ul id='produtos'>";
 
-    $q = ucfirst(strtolower($q));
+    	echo "<li><b>ID<b></li>";
+    	echo "<li><b>NOME</b></li>";
+    	echo "<li><b>OPÇÕES</b></li>";
 
-    //$q = utf8_decode($q);
+    	echo "<li>&nbsp;</li>";
+    	echo "<li>&nbsp;</li>";
+    	echo "<li>&nbsp;</li>";
 
-    if ($q !== "") {
+    while($rowc = mysql_fetch_array($sqlc)){
 
-		if(in_array($q, $frutas)){
 
-			mysql_query("INSERT INTO caixa(nome) VALUES ('$q')");
+    	echo "<li>".$rowc['id']."</li>";
+    	echo "<li><input type='text' value='{$rowc['nome']}' style='height:16px;' id='frutaa'></li>";
+    	echo "<li><a onclick='excluirFruta({$rowc['id']})'>Excluir</a>&nbsp; | &nbsp;<a onclick='alterarFruta({$rowc['id']})'>Alterar</a></li>";
+    	
+    }
 
-		    $fruta = "Cadastro Efetuado com sucesso";
-
-		    echo $fruta;
-
-		}else{
-
-			$fruta = "Esta fruta não existe na base de dados!!";
-
-			echo $fruta;
-		}
-
-	}
+    echo "</ul>";
 
 	
 

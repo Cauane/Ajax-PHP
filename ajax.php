@@ -1,11 +1,12 @@
 <?php
 
 	include("conexao.php");
-	mysql_set_charset('utf8');
+	ini_set('default_charset','UTF-8');
+  	mysql_set_charset('utf8');
     
     $frutas = array("Abacaxi", "Banana", "Maça", "Melância", "Pêra", "Morango", "Uva", "Mamão");
 
-    @$q = $_REQUEST["q"];
+    $q = $_REQUEST["q"];
 
     $q = ucfirst(strtolower($q));
 

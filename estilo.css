@@ -46,3 +46,10 @@ a{
 
 	margin-top: 50px;
 }
+
+#produtos li{
+
+	width: 33%;
+	float: left;
+	margin-bottom: 15px;
+}

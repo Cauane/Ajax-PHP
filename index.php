@@ -43,6 +43,7 @@ include("ajax.php");
              xmlhttp.onreadystatechange = function() {
                  if (this.readyState == 4 && this.status == 200) {
                      alert(this.responseText);
+                     $('#mensagem').load('retorno.php');
                  }
              };
              xmlhttp.open("GET", "ajax.php?q=" + str, true);
@@ -55,17 +56,43 @@ include("ajax.php");
 
      $(document).ready(function(){
 
-          $.ajax({
-              url: "retorno.php",
-              type: "POST",              
-              dataType: "html"
+       $('#mensagem').load('retorno.php');
+        
+      });
 
-          }).done(function(resposta) {
-              console.log(resposta);
+     // EXCLUIR
 
-          });                  
-                     
-     });
+     function excluirFruta(ide) {
+        
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+                $('#mensagem').load('retorno.php');
+            }
+        };
+        xmlhttp.open("GET", "excluir.php?e=" + ide, true);
+        xmlhttp.send();
+       
+    }
+
+    // ALTERAR
+
+     function alterarFruta(ida) {
+
+       novaf = document.getElementById("frutaa").value;
+        
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+                $('#mensagem').load('retorno.php');
+            }
+        };
+        xmlhttp.open("GET", "alterar.php?frutaa=" + novaf + "&ida=" + ida, true);
+        xmlhttp.send();
+       
+    }
     </script>
 </head>
 <body>
@@ -79,7 +106,7 @@ include("ajax.php");
 
                <input type="text" id="fruta" placeholder="Insira nome da Fruta:"> <br><br>
 
-               <input type="button" value="Enviar" onclick="showFruta()">
+               <input type="button" value="Enviar" id="enviar" onclick="showFruta()">
 
           </form>
 
@@ -89,7 +116,7 @@ include("ajax.php");
 
           <br><br>
 
-          <p class="titulo">LISTA DE PRODUTOS CADASTRADO:</p> <br>
+          <p class="titulo">LISTA DE PRODUTOS CADASTRADO:</p> <br><br><br>
 
           <div id="mensagem"></div>
 
